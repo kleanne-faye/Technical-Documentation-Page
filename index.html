@@ -1,0 +1,613 @@
+<link
+  rel="stylesheet"
+  href="tech-css.css"
+/>
+<title>GAS Documentation</title>
+<nav id="navbar">
+  <header>Google App Script Documentation</header>
+  <ul>
+    <li><a class="nav-link" href="#Overview">Overview</a></li>
+    <li>
+      <a class="nav-link" href="#What_is_google_app_script_used_for">
+        What is Google App Script used for?</a>
+    </li>
+    <li>
+      <a class="nav-link" href="#What_can_app_script_do">What can Apps Script do?</a>
+    </li>
+    <li><a class="nav-link" href="#your_first_script">Your First Script</a></li>
+    <li><a class="nav-link" href="#learn_apps_script">Learn Apps Script</a></li>
+    <li>
+      <a class="nav-link" href="#types_of_scripts">Types of Scripts</a>
+    </li>
+    <li><a class="nav-link" href="#user_interfaces">User Interfaces</a></li>
+    <li><a class="nav-link" href="#Reference">Reference</a></li>
+  </ul>
+</nav>
+<main id="main-doc">
+  <section class="main-section" id="Overview">
+    <header>Overview of Google App Script</header>
+    <article>
+      <p>
+        Google Apps Script is a rapid application development platform that makes it fast and easy to create business applications that integrate with Google Workspace. You write code in modern JavaScript and have access to built-in libraries for favorite Google Workspace applications like Gmail, Calendar, Drive, and more. There's nothing to install—we give you a code editor right in your browser, and your scripts run on Google's servers.
+
+      <p>If you're new to JavaScript, Codecademy offers
+        <a href="https://www.codecademy.com/catalog/language/javascript">a number of JavaScript courses.</a>
+         (Note that these courses weren't developed by and aren't associated with Google.)
+      </p>
+    </article>
+  </section>
+
+
+   <section class="main-section" id="What_is_google_app_script_used_for">
+    <header>What is Google App Script used for?</header>
+    <article>
+      <p>
+        Google Apps Script is a JavaScript platform that provides easy ways to integrate with and 
+        automate tasks across Google products. Google Apps Script is a JavaScript cloud scripting 
+        language that provides easy ways to automate tasks across Google products and third party 
+        services and build web applications.
+      </p>
+    </article>
+  </section>
+
+  <section class="main-section" id="What_can_app_script_do">
+    <header>What can Apps Script do?</header>
+    <article>
+      <p>Apps Script is versatile. Among other things, you can:</p>
+
+      <ul>
+        <li>
+          Add custom menus, dialogs, and sidebars to Google Docs, Sheets, and Forms.
+        </li>
+        <li>Write custom functions and macros for Google Sheets.</li>
+        <li>
+          Publish web apps — either standalone or embedded in Google Sites.
+        </li>
+        <li>Interact with other Google services, including AdSense, Analytics, Calendar, Drive, Gmail, and Maps.</li>
+        <li>Build add-ons to extend Google Docs, Sheets, Slides, and Forms, and publish them to the Add-on store.</li>
+      </ul>
+    </article>
+  </section>
+ 
+  <section class="main-section" id="your_first_script">
+    <header>Your first script</header>
+    <article>
+      Build and run a simple standalone script that creates a Google Doc and emails you a link to it.
+    <h3>Set it up</h3>
+    <p>To build the script, follow the steps below.</p>
+    <h4>For New Editor</h4>
+    <ol>
+      <li>Sign in to your Google Account.</li>
+      <lil>To open the script editor, go to <a href="https://script.google.com/home">script.google.com.</a> If this is the first time you've been to <code>script.google.com,</code> click <strong>View Dashboard</strong>.</li>
+      <li>At the top left, click <strong>New Project</strong>.</li>
+      <li>Delete any code in the script editor and paste in the code below.</li>
+      <code
+        >/**
+ * Creates a Google Doc and sends an email to the current user with a link to the doc.
+ */
+function createAndSendDocument() {
+  // Create a new Google Doc named 'Hello, world!'
+  var doc = DocumentApp.create('Hello, world!');
+
+  // Access the body of the document, then add a paragraph.
+  doc.getBody().appendParagraph('This document was created by Google Apps Script.');
+
+  // Get the URL of the document.
+  var url = doc.getUrl();
+
+  // Get the email address of the active user - that's you.
+  var email = Session.getActiveUser().getEmail();
+
+  // Get the name of the document to use as an email subject line.
+  var subject = doc.getName();
+
+  // Append a new string to the "url" variable to use as an email body.
+  var body = 'Link to your doc: ' + url;
+
+  // Send yourself an email with a link to the document.
+  GmailApp.sendEmail(email, subject, body);
+}
+      </code>
+      <li>At the top, click <strong>Save</strong>.</li>
+      <li>At the top left, click <strong>Untitled project</strong>.</li>
+      <li>Enter a name for your script and click <strong>Rename</strong>.</li>
+    </ol>
+     <h4>For Legacy Editor</h4>
+     <ol>
+     <li>Sign in to your Google Account.</li>
+     <li>To open the script editor, go to <a href="https://script.google.com/home">script.google.com.</a> If this is the first time you've been to <code>script.google.com,</code> click <strong>View Dashboard</strong>.</li>
+     <li>Delete any code in the script editor and paste in the code below.</li>
+     <code>
+      /**
+ * Creates a Google Doc and sends an email to the current user with a link to the doc.
+ */
+function createAndSendDocument() {
+  // Create a new Google Doc named 'Hello, world!'
+  var doc = DocumentApp.create('Hello, world!');
+
+  // Access the body of the document, then add a paragraph.
+  doc.getBody().appendParagraph('This document was created by Google Apps Script.');
+
+  // Get the URL of the document.
+  var url = doc.getUrl();
+
+  // Get the email address of the active user - that's you.
+  var email = Session.getActiveUser().getEmail();
+
+  // Get the name of the document to use as an email subject line.
+  var subject = doc.getName();
+
+  // Append a new string to the "url" variable to use as an email body.
+  var body = 'Link to your doc: ' + url;
+
+  // Send yourself an email with a link to the document.
+  GmailApp.sendEmail(email, subject, body);
+}
+    </code>
+    <li>Select the menu item <strong>File > Save</strong>. Name your new script and click <strong>OK</strong>.</li>
+  </ol>
+      </article>
+  </section>
+
+
+  <section class="main-section" id="learn_apps_script">
+    <header>Learn App Script</header>
+    <h3>Quickstart: Menus and Custom Functions</h3>
+    <p>
+      Complete the steps described on this page, and in about five minute
+      s you'll have created a spreadsheet with custom functions, menu items, 
+      and automated procedures.
+    </p>
+    <img src="https://developers.google.com/apps-script/images/quickstart-custom-functions.png">
+    <h3>Set it up</h3>
+    <p>
+      First, create a new <a href="https://docs.google.com/spreadsheets/d/1DhZK8q-r_mvWN7fH1af2wHYUbP1NahWJMnuK07E_wOs/edit#gid=0">spreadsheet</a>, then from within your new spreadsheet, select the menu item <strong>Tools > Script editor</strong>. Third, delete any code in the script editor and paste in the code below:
+      <code>
+        /**
+ * @OnlyCurrentDoc Limits the script to only accessing the current sheet.
+ */
+
+/**
+ * A special function that runs when the spreadsheet is open, used to add a
+ * custom menu to the spreadsheet.
+ */
+function onOpen() {
+  var spreadsheet = SpreadsheetApp.getActive();
+  var menuItems = [
+    {name: 'Prepare sheet...', functionName: 'prepareSheet_'},
+    {name: 'Generate step-by-step...', functionName: 'generateStepByStep_'}
+  ];
+  spreadsheet.addMenu('Directions', menuItems);
+}
+
+/**
+ * A custom function that converts meters to miles.
+ *
+ * @param {Number} meters The distance in meters.
+ * @return {Number} The distance in miles.
+ */
+function metersToMiles(meters) {
+  if (typeof meters != 'number') {
+    return null;
+  }
+  return meters / 1000 * 0.621371;
+}
+
+/**
+ * A custom function that gets the driving distance between two addresses.
+ *
+ * @param {String} origin The starting address.
+ * @param {String} destination The ending address.
+ * @return {Number} The distance in meters.
+ */
+function drivingDistance(origin, destination) {
+  var directions = getDirections_(origin, destination);
+  return directions.routes[0].legs[0].distance.value;
+}
+
+/**
+ * A function that adds headers and some initial data to the spreadsheet.
+ */
+function prepareSheet_() {
+  var sheet = SpreadsheetApp.getActiveSheet().setName('Settings');
+  var headers = [
+    'Start Address',
+    'End Address',
+    'Driving Distance (meters)',
+    'Driving Distance (miles)'];
+  var initialData = [
+    '350 5th Ave, New York, NY 10118',
+    '405 Lexington Ave, New York, NY 10174'];
+  sheet.getRange('A1:D1').setValues([headers]).setFontWeight('bold');
+  sheet.getRange('A2:B2').setValues([initialData]);
+  sheet.setFrozenRows(1);
+  sheet.autoResizeColumns(1, 4);
+}
+
+/**
+ * Creates a new sheet containing step-by-step directions between the two
+ * addresses on the "Settings" sheet that the user selected.
+ */
+function generateStepByStep_() {
+  var spreadsheet = SpreadsheetApp.getActive();
+  var settingsSheet = spreadsheet.getSheetByName('Settings');
+  settingsSheet.activate();
+
+  // Prompt the user for a row number.
+  var selectedRow = Browser.inputBox('Generate step-by-step',
+      'Please enter the row number of the addresses to use' +
+      ' (for example, "2"):',
+      Browser.Buttons.OK_CANCEL);
+  if (selectedRow == 'cancel') {
+    return;
+  }
+  var rowNumber = Number(selectedRow);
+  if (isNaN(rowNumber) || rowNumber < 2 ||
+      rowNumber > settingsSheet.getLastRow()) {
+    Browser.msgBox('Error',
+        Utilities.formatString('Row "%s" is not valid.', selectedRow),
+        Browser.Buttons.OK);
+    return;
+  }
+
+  // Retrieve the addresses in that row.
+  var row = settingsSheet.getRange(rowNumber, 1, 1, 2);
+  var rowValues = row.getValues();
+  var origin = rowValues[0][0];
+  var destination = rowValues[0][1];
+  if (!origin || !destination) {
+    Browser.msgBox('Error', 'Row does not contain two addresses.',
+        Browser.Buttons.OK);
+    return;
+  }
+
+  // Get the raw directions information.
+  var directions = getDirections_(origin, destination);
+
+  // Create a new sheet and append the steps in the directions.
+  var sheetName = 'Driving Directions for Row ' + rowNumber;
+  var directionsSheet = spreadsheet.getSheetByName(sheetName);
+  if (directionsSheet) {
+    directionsSheet.clear();
+    directionsSheet.activate();
+  } else {
+    directionsSheet =
+        spreadsheet.insertSheet(sheetName, spreadsheet.getNumSheets());
+  }
+  var sheetTitle = Utilities.formatString('Driving Directions from %s to %s',
+      origin, destination);
+  var headers = [
+    [sheetTitle, '', ''],
+    ['Step', 'Distance (Meters)', 'Distance (Miles)']
+  ];
+  var newRows = [];
+  for (var i = 0; i < directions.routes[0].legs[0].steps.length; i++) {
+    var step = directions.routes[0].legs[0].steps[i];
+    // Remove HTML tags from the instructions.
+    var instructions = step.html_instructions.replace(/<br>|<div.*?>/g, '\n')
+        .replace(/<.*?>/g, '');
+    newRows.push([
+      instructions,
+      step.distance.value
+    ]);
+  }
+  directionsSheet.getRange(1, 1, headers.length, 3).setValues(headers);
+  directionsSheet.getRange(headers.length + 1, 1, newRows.length, 2)
+      .setValues(newRows);
+  directionsSheet.getRange(headers.length + 1, 3, newRows.length, 1)
+      .setFormulaR1C1('=METERSTOMILES(R[0]C[-1])');
+
+  // Format the new sheet.
+  directionsSheet.getRange('A1:C1').merge().setBackground('#ddddee');
+  directionsSheet.getRange('A1:2').setFontWeight('bold');
+  directionsSheet.setColumnWidth(1, 500);
+  directionsSheet.getRange('B2:C').setVerticalAlignment('top');
+  directionsSheet.getRange('C2:C').setNumberFormat('0.00');
+  var stepsRange = directionsSheet.getDataRange()
+      .offset(2, 0, directionsSheet.getLastRow() - 2);
+  setAlternatingRowBackgroundColors_(stepsRange, '#ffffff', '#eeeeee');
+  directionsSheet.setFrozenRows(2);
+  SpreadsheetApp.flush();
+}
+
+/**
+ * Sets the background colors for alternating rows within the range.
+ * @param {Range} range The range to change the background colors of.
+ * @param {string} oddColor The color to apply to odd rows (relative to the
+ *     start of the range).
+ * @param {string} evenColor The color to apply to even rows (relative to the
+ *     start of the range).
+ */
+function setAlternatingRowBackgroundColors_(range, oddColor, evenColor) {
+  var backgrounds = [];
+  for (var row = 1; row <= range.getNumRows(); row++) {
+    var rowBackgrounds = [];
+    for (var column = 1; column <= range.getNumColumns(); column++) {
+      if (row % 2 == 0) {
+        rowBackgrounds.push(evenColor);
+      } else {
+        rowBackgrounds.push(oddColor);
+      }
+    }
+    backgrounds.push(rowBackgrounds);
+  }
+  range.setBackgrounds(backgrounds);
+}
+
+/**
+ * A shared helper function used to obtain the full set of directions
+ * information between two addresses. Uses the Apps Script Maps Service.
+ *
+ * @param {String} origin The starting address.
+ * @param {String} destination The ending address.
+ * @return {Object} The directions response object.
+ */
+function getDirections_(origin, destination) {
+  var directionFinder = Maps.newDirectionFinder();
+  directionFinder.setOrigin(origin);
+  directionFinder.setDestination(destination);
+  var directions = directionFinder.getDirections();
+  if (directions.status !== 'OK') {
+    throw directions.error_message;
+  }
+  return directions;
+}
+      </code>
+      Lastly, at the top, click <strong>Save</strong>.
+    </p>
+    <h3>Quickstart: Managing Responses for Google Forms</h3>
+    <p>Complete the steps described in the rest of this page, and in about five minutes you'll
+     have automatically created a Google Form based on data in a spreadsheet, then set it up to email
+    Google Calendar invites and a personalized Google Doc to everyone who responds.</p>
+    <a href="https://developers.google.com/apps-script/images/quickstart-forms.png"></a>
+    <h3>Set it up</h3>
+    <p>
+      First, make a copy of the sample spreadsheet <a href="https://docs.google.com/spreadsheets/u/0/d/1HgtMSoatp1M6pQwwwQqHgZX7jZRldDbSX8VIJ468d4c/copy">Apps Script Quickstart: Managing responses for Google Forms</a>. Second, from within your new spreadsheet, select the menu item <strong>Tools > Script editor</strong>. If you are presented with a welcome screen, click <strong>Blank Project.</strong> Third, rename the Code.gs file to forms.gs. Fourth, replace any code in the forms.gs file with the code below:
+      <code>
+        /**
+ * A special function that inserts a custom menu when the spreadsheet opens.
+ */
+function onOpen() {
+  var menu = [{name: 'Set up conference', functionName: 'setUpConference_'}];
+  SpreadsheetApp.getActive().addMenu('Conference', menu);
+}
+
+/**
+ * A set-up function that uses the conference data in the spreadsheet to create
+ * Google Calendar events, a Google Form, and a trigger that allows the script
+ * to react to form responses.
+ */
+function setUpConference_() {
+  if (ScriptProperties.getProperty('calId')) {
+    Browser.msgBox('Your conference is already set up. Look in Google Drive!');
+  }
+  var ss = SpreadsheetApp.getActive();
+  var sheet = ss.getSheetByName('Conference Setup');
+  var range = sheet.getDataRange();
+  var values = range.getValues();
+  setUpCalendar_(values, range);
+  setUpForm_(ss, values);
+  ScriptApp.newTrigger('onFormSubmit').forSpreadsheet(ss).onFormSubmit()
+      .create();
+  ss.removeMenu('Conference');
+}
+
+/**
+ * Creates a Google Calendar with events for each conference session in the
+ * spreadsheet, then writes the event IDs to the spreadsheet for future use.
+ * @param {Array<string[]>} values Cell values for the spreadsheet range.
+ * @param {Range} range A spreadsheet range that contains conference data.
+ */
+function setUpCalendar_(values, range) {
+  var cal = CalendarApp.createCalendar('Conference Calendar');
+  for (var i = 1; i < values.length; i++) {
+    var session = values[i];
+    var title = session[0];
+    var start = joinDateAndTime_(session[1], session[2]);
+    var end = joinDateAndTime_(session[1], session[3]);
+    var options = {location: session[4], sendInvites: true};
+    var event = cal.createEvent(title, start, end, options)
+        .setGuestsCanSeeGuests(false);
+    session[5] = event.getId();
+  }
+  range.setValues(values);
+
+  // Store the ID for the Calendar, which is needed to retrieve events by ID.
+  ScriptProperties.setProperty('calId', cal.getId());
+}
+
+/**
+ * Creates a single Date object from separate date and time cells.
+ *
+ * @param {Date} date A Date object from which to extract the date.
+ * @param {Date} time A Date object from which to extract the time.
+ * @return {Date} A Date object representing the combined date and time.
+ */
+function joinDateAndTime_(date, time) {
+  date = new Date(date);
+  date.setHours(time.getHours());
+  date.setMinutes(time.getMinutes());
+  return date;
+}
+
+/**
+ * Creates a Google Form that allows respondents to select which conference
+ * sessions they would like to attend, grouped by date and start time.
+ *
+ * @param {Spreadsheet} ss The spreadsheet that contains the conference data.
+ * @param {Array<String[]>} values Cell values for the spreadsheet range.
+ */
+function setUpForm_(ss, values) {
+  // Group the sessions by date and time so that they can be passed to the form.
+  var schedule = {};
+  for (var i = 1; i < values.length; i++) {
+    var session = values[i];
+    var day = session[1].toLocaleDateString();
+    var time = session[2].toLocaleTimeString();
+    if (!schedule[day]) {
+      schedule[day] = {};
+    }
+    if (!schedule[day][time]) {
+      schedule[day][time] = [];
+    }
+    schedule[day][time].push(session[0]);
+  }
+
+  // Create the form and add a multiple-choice question for each timeslot.
+  var form = FormApp.create('Conference Form');
+  form.setDestination(FormApp.DestinationType.SPREADSHEET, ss.getId());
+  form.addTextItem().setTitle('Name').setRequired(true);
+  form.addTextItem().setTitle('Email').setRequired(true);
+  for (var day in schedule) {
+    var header = form.addSectionHeaderItem().setTitle('Sessions for ' + day);
+    for (var time in schedule[day]) {
+      var item = form.addMultipleChoiceItem().setTitle(time + ' ' + day)
+          .setChoiceValues(schedule[day][time]);
+    }
+  }
+}
+
+/**
+ * A trigger-driven function that sends out calendar invitations and a
+ * personalized Google Docs itinerary after a user responds to the form.
+ *
+ * @param {Object} e The event parameter for form submission to a spreadsheet;
+ *     see https://developers.google.com/apps-script/understanding_events
+ */
+function onFormSubmit(e) {
+  var user = {name: e.namedValues['Name'][0], email: e.namedValues['Email'][0]};
+
+  // Grab the session data again so that we can match it to the user's choices.
+  var response = [];
+  var values = SpreadsheetApp.getActive().getSheetByName('Conference Setup')
+     .getDataRange().getValues();
+  for (var i = 1; i < values.length; i++) {
+    var session = values[i];
+    var title = session[0];
+    var day = session[1].toLocaleDateString();
+    var time = session[2].toLocaleTimeString();
+    var timeslot = time + ' ' + day;
+
+    // For every selection in the response, find the matching timeslot and title
+    // in the spreadsheet and add the session data to the response array.
+    if (e.namedValues[timeslot] && e.namedValues[timeslot] == title) {
+      response.push(session);
+    }
+  }
+  sendInvites_(user, response);
+  sendDoc_(user, response);
+}
+
+/**
+ * Add the user as a guest for every session he or she selected.
+ * @param {object} user An object that contains the user's name and email.
+ * @param {Array<String[]>} response An array of data for the user's session choices.
+ */
+function sendInvites_(user, response) {
+  var id = ScriptProperties.getProperty('calId');
+  var cal = CalendarApp.getCalendarById(id);
+  for (var i = 0; i < response.length; i++) {
+    cal.getEventSeriesById(response[i][5]).addGuest(user.email);
+  }
+}
+
+/**
+ * Create and share a personalized Google Doc that shows the user's itinerary.
+ * @param {object} user An object that contains the user's name and email.
+ * @param {Array<string[]>} response An array of data for the user's session choices.
+ */
+function sendDoc_(user, response) {
+  var doc = DocumentApp.create('Conference Itinerary for ' + user.name)
+      .addEditor(user.email);
+  var body = doc.getBody();
+  var table = [['Session', 'Date', 'Time', 'Location']];
+  for (var i = 0; i < response.length; i++) {
+    table.push([response[i][0], response[i][1].toLocaleDateString(),
+        response[i][2].toLocaleTimeString(), response[i][4]]);
+  }
+  body.insertParagraph(0, doc.getName())
+      .setHeading(DocumentApp.ParagraphHeading.HEADING1);
+  table = body.appendTable(table);
+  table.getRow(0).editAsText().setBold(true);
+  doc.saveAndClose();
+
+  // Email a link to the Doc as well as a PDF copy.
+  MailApp.sendEmail({
+    to: user.email,
+    subject: doc.getName(),
+    body: 'Thanks for registering! Here\'s your itinerary: ' + doc.getUrl(),
+    attachments: doc.getAs(MimeType.PDF)
+  });
+}
+      </code>
+      Lastly, select the menu item <strong>File > Save</strong>. Name your new script and click <strong>OK</strong>.
+    </p>
+  </section>
+
+  <section class="main-section" id="types_of_scripts">
+    <header>Types of Scripts</header>
+    <h3>Standalone Scripts</h3>
+      <h5>A standalone script is any script that is not bound to a Google Sheets, 
+      Docs, Slides, or Forms file or Google Sites. These scripts appear among your files in Google Drive.</h5>
+    <h3>Container-bound Scripts</h3>
+      <h5>A script is bound to a Google Sheets, Docs, Slides, or Forms file if it was created from that document rather 
+        than as a standalone script. The file a bound script is attached to is referred to as a "container". Bound scripts
+         generally behave like standalone scripts except that they do not appear in Google Drive, they cannot be detached
+          from the file they are bound to, and they gain a few special privileges over the parent file.<br>
+
+          Note that scripts can also be bound to Google Sites, but these scripts are almost always deployed as web apps. S
+          cripts bound to Sheets, Docs, Slides, or Forms can also become web apps, although this is uncommon.</h5>
+    <h3>Web Apps</h3>
+      <h5>If you build a user interface for a script, you can publish the script as a web app. 
+        For example, a script that lets users schedule appointments with members of a support 
+        team would best be presented as a web app so that users can access it directly from their browsers.<br>
+
+        Both standalone scripts and scripts bound to Google Workspace applications can be
+         turned into web apps, so long as they meet the requirements below.</h5>
+  </section>
+  <section class="main-section" id="user_interfaces">
+    <header>User Interfaces</header>
+    <article>
+      <h3>HTML Service: Create and Serve HTML</h3>
+      <p>
+        The HTML service lets you serve web pages that can interact with server-side Apps Script functions.
+        It is particularly useful for building web apps or adding custom user interfaces in Google Docs, Sheets,
+        and Forms. You can even use it to generate the body of an email.
+      
+      <h3>Create HTML files</h3>
+        <h4>To add an HTML file to your Apps Script project, open the Script Editor and choose File > New > HTML File.</h4>
+        Within the HTML file, you can write most standard HTML, CSS, and client-side JavaScript. The page will be served as HTML5,
+         although some advanced features of HTML5 are not available, as explained in Restrictions.
+         <br>
+        Your file can also include template scriptlets that are processed on the server before the page is sent to the user — similar
+         to PHP — as explained in the section on templated HTML.
+         <h3>Serve HTML as a web app</h3>
+         To create a web app with the HTML service, your code must include a doGet() function that tells the script how to
+          serve the page. The function must return an HtmlOutput object, as shown in this example: (in Code.gs)
+      <code>
+ function doGet() {
+  return HtmlService.createHtmlOutputFromFile('Index');
+}
+</code>
+    Once that basic framework is in place, all you have to do is save a version of your script, then deploy your script as a web app. <br>
+    After the script is deployed as a web app, you can also choose to embed it in a Google Site.
+    </p>
+    </article>
+  </section>
+  
+  <section class="main-section" id="Reference">
+    <header>Reference</header>
+    <article>
+      <ul>
+        <li>
+          All the documentation in this page is taken from
+          <a
+            href="https://developers.google.com/apps-script/"
+            target="_blank"
+            >Google App Script</a
+          >
+        </li>
+      </ul>
+    </article>
+  </section>
+</main>
